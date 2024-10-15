@@ -1,101 +1,110 @@
+import Link from "next/link";
+import Header from "../partials/header";
+import { use } from "react";
+import { cookies } from "next/headers";
+import { IDiseasesResponse } from "@/types";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
+async function getDiseases() {
+  try {
+    const cookie = cookies().toString();
+    const req = await fetch(
+      process.env.NEXT_PUBLIC_CLIENT_URL + "/api/diseases",
+      {
+        headers: {
+          Cookie: cookie,
+        },
+      }
+    );
+    if (!req.ok) throw new Error("not ok");
+    return req.json();
+  } catch (error) {
+    console.log("error", error);
+    return { error: true };
+  }
+}
 export default function Home() {
+  const diseases: IDiseasesResponse = use(getDiseases());
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <>
+      <section
+        style={{ background: "url('/box.svg')" }}
+        className="min-h-full flex justify-between items-center flex-col"
+      >
+        <div className="p-4 md:p-8 w-full">
+          <Header />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <div className="flex w-full max-w-6xl items-center justify-between p-4 md:p-6 flex-wrap">
+          <main className="w-full md:max-w-xl space-y-6 p-4 order-2 md:order-1">
+            <span className="bg-black text-red-500 rounded-full p-2 px-4  font-medium">
+              Med<span className="text-white">Scribe</span>
+            </span>
+            <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold">
+              Take care of your loved ones.
+            </h1>
+            <p className="text-neutral-800">
+              Never miss an important health check up dates, appointments and
+              many more with our specially crafter app.
+            </p>
+            <div className="flex gap-2 flex-wrap max-w-sm text-center">
+              <Link
+                className="w-full sm:flex-1 py-3 px-4 rounded-full bg-neutral-100 hover:bg-neutral-200 border text-neutral-800"
+                href="/about"
+              >
+                Learn more
+              </Link>
+
+              <Link
+                className="w-full sm:flex-1 py-3 px-4 rounded-full bg-neutral-800 hover:bg-neutral-900 text-white"
+                href={diseases.error ? "/sign-in" : "/profile"}
+              >
+                {diseases.error ? "Join Us" : "Go to profile"}
+              </Link>
+            </div>
+          </main>
+          <aside className="order-1 md:order-2">
+            <Image height={400} width={400} alt="MedScribe" src="/aside.webp" />
+          </aside>
+        </div>
+        <p className="text-xs py-4 text-red-600">By Shiban Nandi and team</p>
+      </section>
+      <hr />
+      <section className="max-w-6xl mx-auto p-4 md:p-6 md:pt-12 ">
+        {diseases.error ? (
+          <section className="p-6 rounded-2xl bg-neutral-100 space-y-4">
+            <p className="text-lg font-medium">
+              Please sign in to see detailed information on various common
+              diseases and doctors around you
+            </p>
+            Click here to{" "}
+            <Button asChild className="rounded-full">
+              <Link href="/sign-in">Sign in</Link>
+            </Button>
+          </section>
+        ) : (
+          <>
+            <p className="p-4">Learn about some common diseases</p>
+            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {diseases?.data.documents?.map((doc) => (
+                <Link
+                  href={"/diseases/" + doc.slug}
+                  key={doc.slug}
+                  className="w-full bg-card hover:border-accent-foreground border p-4 rounded-lg flex flex-col"
+                >
+                  <h2 className="font-medium text-lg">{doc.name}</h2>
+                  <p className="text-secondary-foreground line-clamp-2">
+                    {doc.description}
+                  </p>
+                  <small className="inline-block text-right mt-auto hover:text-red-700">
+                    Read more ...
+                  </small>
+                </Link>
+              ))}
+            </section>
+          </>
+        )}
+      </section>
+    </>
   );
 }
