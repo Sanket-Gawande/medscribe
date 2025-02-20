@@ -22,32 +22,27 @@ function AboutPage() {
         <h1 className="text-3xl md:text-4xl font-black">About us</h1>
       </section>
       <section className="p-4 md:p-6 space-y-6 max-w-xl mx-auto">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-        suscipit modi omnis illum quidem, ut sapiente officia voluptate deserunt
-        aliquam optio quod quia odit commodi necessitatibus dolor non deleniti.
-        Natus harum deserunt pariatur ad. Deleniti doloribus culpa adipisci
-        asperiores earum hic atque eligendi eius numquam fugit ex consequuntur
-        officiis, illum fugiat vel corrupti explicabo animi aliquid error quasi
-        quo, facere repudiandae? Adipisci quibusdam dolores vero amet
-        repellendus consectetur? Molestias dolorem suscipit vitae animi
-        sapiente, quasi enim ipsum atque quae in ex similique quod. Totam
-        possimus quod nostrum ut eveniet corrupti, excepturi dolores eligendi
-        tenetur magni officiis accusamus inventore ratione nihil iure aliquid
-        est dolorem quia in, atque porro, animi harum sequi.
         <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque quos
-          autem corrupti quam dicta, quidem, voluptatibus velit eum officia quis
-          blanditiis ipsa. Tenetur aperiam autem dolores, culpa inventore
-          eligendi veniam ipsam natus enim velit deserunt magnam, itaque est at,
-          aliquam laborum dolorem earum! Accusantium error ipsam, consequatur
-          fuga neque commodi deserunt accusamus consectetur magnam aut sapiente
-          sit, porro quod, necessitatibus rem voluptatem nulla nam nemo delectus
-          a exercitationem natus distinctio. Quod pariatur modi ipsam nisi
-          possimus. Quos deserunt illum excepturi ad eveniet sapiente error
-          laboriosam vero, reiciendis atque dolor molestias velit eaque maxime
-          ipsum quas perferendis culpa sit quam fugit alias optio totam iste
-          quia? Rerum quo odio in dolore veniam!
-        </p>
+
+        
+      Welcome to app Med Scribe!
+ </p>
+ <p>
+
+ 
+In today's fast-paced healthcare environment, efficient management of patient information is crucial for providing quality care. Med Scribe is designed to streamline the documentation and storage of treatment records, enabling healthcare professionals to access and update patient data with ease. This software not only enhances the accuracy of medical records but also ensures compliance with regulatory standards, improving overall patient safety and care outcomes
+</p>
+<p>
+
+
+Med Scribe enhances the accuracy of medical records and helps to provide treatment fast.
+</p>
+<p>
+
+
+As healthcare becomes increasingly digitized, adopting such innovative solutions is essential for enhancing patient operational
+ efficiency.
+ </p>
       </section>
     </div>
   );
